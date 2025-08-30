@@ -1,0 +1,618 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            background-image: linear-gradient(to right, #234a91, #912077);
+        }
+
+        .cal {
+            background-image: linear-gradient(to right, rgb(255, 239, 16), rgb(255, 143, 16), rgba(115, 255, 0, 0.5));
+            width: 400px;
+            height: 535px;
+            border-radius: 15px;
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 5px 5px 3px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .flex_holder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+        }
+
+        .result {
+            background-color: white;
+            border-radius: 10px;
+            width: 80%;
+            height: 60px;
+            /* overflow: scroll; */
+        }
+
+        .result2 {
+            background-color: rgba(255, 255, 255, 0.815);
+            border-radius: 10px;
+            width: 80%;
+            height: 30px;
+            /* overflow: scroll; */
+        }
+
+        .start_place {
+            margin-left: 20px;
+        }
+
+        .flex_holder2 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .bottons_div {
+            width: 80%;
+            height: 374px;
+            position: relative;
+        }
+
+        .flexi {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .bottons {
+            background-image: linear-gradient(to right, rgb(60, 255, 0), rgb(127.5, 127.5, 0));
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-block;
+            text-align: center;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1 id="test">
+        hello
+    </h1> -->
+    <div class="cal">
+        <div class="flex_holder">
+            <div class="result">
+                <h2 class="start_place" id="res">0</h2>
+            </div>
+        </div>
+        <div class="flex_holder2">
+            <div id="outPut" class="result2">
+
+            </div>
+        </div>
+        <div class="flex_holder2">
+            <div class="bottons_div">
+                <div class="flexi">
+                    <button class="bottons" id="one" onclick="btns(this)">
+                        <h3>1</h3>
+                    </button>
+                    <button class="bottons" id="two" onclick="btns(this)">
+                        <h3>2</h3>
+                    </button>
+                    <button class="bottons" id="three" onclick="btns(this)">
+                        <h3>3</h3>
+                    </button>
+                    <button class="bottons" id="plus" title="plus" onclick="btns(this)">
+                        <h3>+</h3>
+                    </button>
+                </div>
+                <div class="flexi">
+                    <button class="bottons" id="four" onclick="btns(this)">
+                        <h3>4</h3>
+                    </button>
+                    <button class="bottons" id="five" onclick="btns(this)">
+                        <h3>5</h3>
+                    </button>
+                    <button class="bottons" id="six" onclick="btns(this)">
+                        <h3>6</h3>
+                    </button>
+                    <button class="bottons" id="minus" title="minus" onclick="btns(this)">
+                        <h3>-</h3>
+                    </button>
+                </div>
+                <div class="flexi">
+                    <button class="bottons" id="seven" onclick="btns(this)">
+                        <h3>7</h3>
+                    </button>
+                    <button class="bottons" id="eight" onclick="btns(this)">
+                        <h3>8</h3>
+                    </button>
+                    <button class="bottons" id="nine" onclick="btns(this)">
+                        <h3>9</h3>
+                    </button>
+                    <button class="bottons" id="multiple" title="multiple" onclick="btns(this)">
+                        <h3>*</h3>
+                    </button>
+                </div>
+                <div class="flexi">
+                    <button class="bottons" onclick="btns(this)">
+                        <h3>0</h3>
+                    </button>
+                    <button class="bottons" id="cls" onclick="btns(this)">
+                        <h3>CE</h3>
+                    </button>
+                    <button class="bottons" id="floatDot" onclick="btns(this)">
+                        <h3>.</h3>
+                    </button>
+                    <button class="bottons" title="divison" onclick="btns(this)">
+                        <h3>/</h3>
+                    </button>
+                </div>
+                <div class="flexi">
+                    <button class="bottons" id="equal" onclick="btns(this)">
+                        <h3>=</h3>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        var all = 0;
+        var value;
+        var sValue;
+        var operator = "";
+        var oldValue;
+        var count = 0;
+        function btns(key){
+            count++;
+            sValue = key.firstChild;
+            while(sValue && sValue.nodeType !== 1){
+                sValue = sValue.nextSibling;
+            }
+
+            switch(sValue.innerText){
+                case "CE":
+                    document.getElementById("res").innerHTML = "0";
+                    document.getElementById("outPut").innerHTML = "";
+                    all = 0;
+                    value;
+                    sValue;
+                    operator = "";
+                    oldValue;
+                    count = 0;
+                    break;
+                case "+":
+                    operator = "+";
+                    oldValue = value;
+                    value = 0;
+                    document.getElementById("outPut").innerHTML += document.getElementById("res").innerHTML + operator;
+                    document.getElementById("res").innerHTML = "";
+                    count = 1;
+                    break;
+                case "-":
+                    operator = "-";
+                    oldValue = value;
+                    value = 0;
+                    count = 1;
+                    document.getElementById("outPut").innerHTML += document.getElementById("res").innerHTML + operator;
+                    document.getElementById("res").innerHTML = "";
+                    break;
+                case "*":
+                    operator = "*";
+                    oldValue = value;
+                    value = 0;
+                    document.getElementById("outPut").innerHTML += document.getElementById("res").innerHTML + operator;
+                    document.getElementById("res").innerHTML = "";
+                    count = 1;
+                    break;
+                case "/":
+                    operator = "/";
+                    oldValue = value;
+                    value = 0;
+                    document.getElementById("outPut").innerHTML += document.getElementById("res").innerHTML + operator;
+                    document.getElementById("res").innerHTML = "";
+                    count = 1;
+                    break;
+                case "=":
+                    operator = "=";
+                    break;
+                default:
+                    // alert(count)
+                    if(operator == "" && count == 1)
+                    {
+                        value = sValue.innerText;
+                    }
+                    else if(operator == "" && count > 1)
+                    {
+                        value = parseInt(String(value) + String(sValue.innerText));
+                    }
+                    else if(operator != "" && count == 1){
+                        value = parseInt(sValue.innerText);
+                    }
+                    else if(operator != "" && count > 1){
+                        value = parseInt(String(value) + String(sValue.innerText));
+                    }
+                    document.getElementById("res").innerHTML = "";
+                    document.getElementById("res").innerHTML += value;
+                    count++;
+                    break;
+            }
+
+            // var test = 0;
+            // alert(all);
+
+            switch(operator){
+                case "+":
+                    all = parseInt(oldValue) + parseInt(value);
+                    break;
+                case "-":
+                    all = parseInt(oldValue) - parseInt(value);
+                    break;
+                case "*":
+                    all = parseInt(oldValue) * parseInt(value);
+                    break;
+                case "/":
+                    all = parseInt(oldValue) / parseInt(value);
+                    break;
+                case "=":
+                    // all = parseInt(oldValue);
+                    document.getElementById("outPut").innerHTML = all;
+                    document.getElementById("res").innerHTML = all;
+                    break;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // var saveOprator = "";
+        // var lastNum = null;
+        // var oprator = "";
+        // var calculateCount = 0;
+        // var isFloat = false;
+        // var inputNumCount = 0;
+
+        // // "2" + "1" = 21
+
+        // var f = "";
+        // f.split()
+
+        // function zero() {
+        //     all = parseInt((String(all) + String(0)));
+        //     document.getElementById("res").innerHTML = all;
+        // }
+        // function one() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 1;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(1)));
+        //         }
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "1";
+        //             lastNum = 1;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 1;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.1;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function two() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 2;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(2)));
+        //         }
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "2";
+        //             lastNum = 2;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 2;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.2;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function three() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 3;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(3)));
+        //         }
+
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "3";
+        //             lastNum = 3;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 3;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.3;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function four() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 4;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(4)));
+        //         }
+
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "4";
+        //             lastNum = 4;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 4;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.4;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function five() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 5;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(5)));
+        //         }
+
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "5";
+        //             lastNum = 5;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 5;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.5;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function six() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 6;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(6)));
+        //         }
+
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "6";
+        //             lastNum = 6;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 6;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.6;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function seven() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 7;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(7)));
+        //         }
+
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "7";
+        //             lastNum = 7;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 7;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.7;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function eight() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 8;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(8)));
+        //         }
+
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "8";
+        //             lastNum = 8;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 8;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.8;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+        // function nine() {
+        //     if (oprator == "" && !isFloat) {
+        //         if (all == 0) {
+        //             all = 9;
+        //         }
+        //         else {
+        //             all = parseInt((String(all) + String(9)));
+        //         }
+
+        //         document.getElementById("res").innerHTML = all;
+        //     }
+        //     else if (oprator != "") {
+        //         if (inputNumCount == 0) {
+        //             document.getElementById("res").innerHTML += "9";
+        //             lastNum = 9;
+        //             inputNumCount++;
+        //         }
+        //         else {
+        //             lastNum = (lastNum * 10) + 9;
+        //             document.getElementById("res").innerHTML += String(lastNum % 10);
+        //         }
+        //     }
+        //     else if (isFloat == true) {
+        //         all += 0.9;
+        //         document.getElementById("res").innerHTML = all;
+        //         isFloat = false;
+        //     }
+        // }
+
+        // document.getElementById("floatDot").onclick = function dot() {
+        //     if (oprator == "") {
+        //         isFloat = true;
+        //         document.getElementById("res").innerHTML = all + ".";
+        //     }
+        // }
+
+        // document.getElementById("plus").onclick = function plus() {
+        //     if (oprator != "") {
+        //         saveOprator = oprator;
+        //     }
+        //     oprator = "+";
+        //     document.getElementById("res").innerHTML = String(all) + "+";
+        //     calculateCount++;
+        // }
+
+        // document.getElementById("minus").onclick = function minus() {
+        //     if (oprator != "") {
+        //         saveOprator = oprator;
+        //     }
+        //     oprator = "-";
+        //     document.getElementById("res").innerHTML = String(all) + "-";
+        //     calculateCount++;
+        // }
+
+        // document.getElementById("multiple").onclick = function multiple() {
+        //     if (oprator != "") {
+        //         saveOprator = oprator;
+        //     }
+        //     oprator = "*";
+        //     document.getElementById("res").innerHTML = String(all) + "*";
+        //     calculateCount++;
+        // }
+
+        // document.getElementById("equal").onclick = function equali() {
+        //     if (oprator == "+") {
+        //         all = all + lastNum;
+        //     }
+        //     else if (oprator == "-") {
+        //         all = all - lastNum;
+        //     }
+        //     else if (oprator == "*") {
+        //         all = all * lastNum;
+        //     }
+        //     else if (oprator == "/") {
+        //         all = all / lastNum;
+        //     }
+        //     document.getElementById("res").innerHTML = String(all);
+        //     oprator = "";
+        //     all = 0;
+        //     calculateCount = 0;
+        //     inputNumCount = 0;
+        // }
+
+        // document.getElementById("cls").onclick = function clear() {
+        //     all = 0;
+        //     oprator = "";
+        //     calculateCount = 0;
+        //     inputNumCount = 0;
+        //     document.getElementById("res").innerHTML = all;
+        // }
+
+    </script>
+</body>
+
+</html>
